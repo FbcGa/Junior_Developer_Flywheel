@@ -37,6 +37,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-
+.env
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Linux,Windows,mac,env
