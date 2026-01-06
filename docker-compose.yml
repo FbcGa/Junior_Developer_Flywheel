@@ -5,6 +5,15 @@ services:
       target: dev
     ports:
       - 3000:3000
-    volumes:
-      - ./frontend/app:/code/app
+    environment:
+      WATCHPACK_POLLING: "true"
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}
+    develop:
+      watch:
+      - action: sync
+        path: ./frontend/app
+        target: /code/app
+        ignore:
+          - node_modules/
     

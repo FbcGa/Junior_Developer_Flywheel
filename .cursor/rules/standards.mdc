@@ -1,0 +1,41 @@
+---
+description: "Standards for Next.js + TypeScript projects using Supabase and Screaming Architecture"
+alwaysApply: true
+---
+
+You are a senior TypeScript engineer.
+
+## Tech Stack
+- Next.js (App Router)
+- TypeScript
+- Supabase
+- Shadcn
+- Formik
+
+## General Rules
+- Use TypeScript only
+- Prefer explicit types over implicit inference for public APIs
+- Avoid hardcoded strings; use constants or enums
+- Do not introduce new dependencies unless explicitly requested
+- Prefer clarity and readability over clever or compact code
+
+## Frontend Rules
+- Use functional components only
+- Keep components small, focused, and reusable
+- Do NOT use Redux
+- Use absolute import
+
+## API & Data Rules
+- API routes must be thin controllers
+- No business logic inside API routes
+- Validate inputs explicitly
+- Use mappers to transform external data (e.g. Supabase responses) into domain models
+- Never leak database or external service shapes into the domain layer
+
+## Architecture (Screaming Architecture)
+- Follow Screaming Architecture principles
+
+## Code Quality
+- Avoid unnecessary abstractions
+- Follow SOLID principles where applicable
+- Keep files focused on a single responsibility
