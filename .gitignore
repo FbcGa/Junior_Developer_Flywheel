@@ -39,4 +39,8 @@ $RECYCLE.BIN/
 
 .env
 
+.cursor/
+.cursorrules
+.cursor/rules/
+
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Linux,Windows,mac,env
