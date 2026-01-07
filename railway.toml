@@ -4,6 +4,6 @@ dockerfilePath = "frontend/Dockerfile"
 dockerfileContext = "frontend"
 
 [deploy]
-startCommand = "node server.js"
+startCommand = "pnpm start"
 healthcheckPath = "/"
 healthcheckTimeout = 100
