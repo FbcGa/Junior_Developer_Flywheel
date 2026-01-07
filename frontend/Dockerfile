@@ -1,6 +1,7 @@
 FROM node:20-alpine AS base
 
-ARG APP_DIR=.
+# Default to root-context builds (e.g., Railway). Override with --build-arg APP_DIR=.
+ARG APP_DIR=frontend
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /code
@@ -9,12 +10,12 @@ COPY ${APP_DIR}/package.json ${APP_DIR}/pnpm-lock.yaml* ${APP_DIR}/pnpm-workspac
 RUN pnpm install
 
 FROM base AS dev
-ARG APP_DIR=.
+ARG APP_DIR=frontend
 COPY ${APP_DIR}/. .
 CMD ["pnpm", "dev"]
 
 FROM base AS builder
-ARG APP_DIR=.
+ARG APP_DIR=frontend
 COPY ${APP_DIR}/. .
 RUN pnpm build
 
