@@ -12,6 +12,7 @@ import {
   TaskFormValues,
   taskFormValidationSchema,
 } from "@/dashboard/(tasks)/schemas/taskFormSchema";
+import { TASK_STATUS } from "@/dashboard/(tasks)/types/task";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 
@@ -29,6 +30,7 @@ export function TaskForm({
       description: initialValues?.description ?? "",
       startDate: initialValues?.startDate ?? "",
       dueDate: initialValues?.dueDate ?? "",
+      status: initialValues?.status ?? TASK_STATUS.TODO,
     },
     validationSchema: taskFormValidationSchema,
     enableReinitialize: true,
@@ -39,6 +41,7 @@ export function TaskForm({
           description: values.description.trim() || undefined,
           startDate: values.startDate || undefined,
           dueDate: values.dueDate || undefined,
+          status: values.status,
         });
         toast.success(
           isEditMode
@@ -145,6 +148,48 @@ export function TaskForm({
               )}
             />
           </div>
+
+          {isEditMode && (
+            <div className="space-y-2">
+              <Label htmlFor="status">Status *</Label>
+              <select
+                id="status"
+                value={formik.values.status}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className={cn(
+                  "w-full min-w-0 rounded-md border border-zinc-200 bg-white px-3 py-2 text-base text-zinc-900 shadow-xs outline-none transition-[color,box-shadow] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+                  "dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100",
+                  "focus-visible:border-zinc-400 focus-visible:ring-[3px] focus-visible:ring-zinc-200 dark:focus-visible:border-zinc-600 dark:focus-visible:ring-zinc-800",
+                  formik.touched.status &&
+                    formik.errors.status &&
+                    "border-red-500"
+                )}
+              >
+                <option
+                  value={TASK_STATUS.TODO}
+                  className="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100"
+                >
+                  To Do
+                </option>
+                <option
+                  value={TASK_STATUS.IN_PROGRESS}
+                  className="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100"
+                >
+                  In Progress
+                </option>
+                <option
+                  value={TASK_STATUS.DONE}
+                  className="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100"
+                >
+                  Done
+                </option>
+              </select>
+              {formik.touched.status && formik.errors.status && (
+                <p className="text-sm text-red-500">{formik.errors.status}</p>
+              )}
+            </div>
+          )}
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">

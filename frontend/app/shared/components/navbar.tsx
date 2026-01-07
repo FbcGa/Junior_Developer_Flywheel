@@ -50,11 +50,11 @@ export function Navbar() {
         <div className="container mx-auto px-3 py-3 sm:px-4 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-blue-600 text-white shadow-sm sm:size-8">
-                <span className="text-xs font-bold sm:text-sm">D</span>
+              <div className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-sm sm:size-8">
+                <span className="text-xs font-bold sm:text-sm">T</span>
               </div>
               <div className="text-lg font-bold text-zinc-900 dark:text-zinc-100 sm:text-xl">
-                Dashboard
+                Tasky
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -74,18 +74,18 @@ export function Navbar() {
       <div className="container mx-auto px-3 py-3 sm:px-4 sm:py-4">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-blue-600 text-white shadow-sm sm:size-8">
-              <span className="text-xs font-bold sm:text-sm">D</span>
+            <div className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-sm sm:size-8">
+              <span className="text-xs font-bold sm:text-sm">T</span>
             </div>
             <div className="text-lg font-bold text-zinc-900 dark:text-zinc-100 sm:text-xl">
-              Dashboard
+              Tasky
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             {user && (
               <>
                 <div className="hidden items-center gap-3 rounded-lg bg-zinc-50 px-3 py-2 dark:bg-zinc-800/50 md:flex">
-                  <div className="flex size-8 items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-pink-500 text-white shadow-sm">
+                  <div className="flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-sm">
                     <UserIcon className="size-4" />
                   </div>
                   <div className="flex flex-col">
@@ -100,7 +100,7 @@ export function Navbar() {
                   </div>
                 </div>
 
-                <div className="flex size-8 items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-pink-500 text-white shadow-sm md:hidden">
+                <div className="flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-sm md:hidden">
                   <UserIcon className="size-4" />
                 </div>
 

@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { Task } from "@/dashboard/(tasks)/types/task";
-import { mapTaskFromDb } from "@/dashboard/(tasks)/helpers/mapTaskFromDb";
+import { mapTaskFromDb } from "@/dashboard/(tasks)/helpers/taskMappers";
 import { groupTasksByStatus, GroupedTasks } from "@/dashboard/(tasks)/helpers/groupTasksByStatus";
 
 async function getTasks(): Promise<Task[]> {

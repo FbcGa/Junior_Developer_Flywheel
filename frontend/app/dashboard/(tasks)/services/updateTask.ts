@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/client";
 import { TaskStatus } from "@/dashboard/(tasks)/types/task";
-import { mapStatusToDb } from "@/dashboard/(tasks)/helpers/mapStatusToDb";
+import { mapStatusToDb } from "@/dashboard/(tasks)/helpers/taskMappers";
 
 interface UpdateTaskInput {
   id: string;

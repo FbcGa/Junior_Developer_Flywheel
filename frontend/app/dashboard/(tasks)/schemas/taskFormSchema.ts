@@ -1,10 +1,12 @@
 import * as yup from "yup";
+import { TaskStatus } from "@/dashboard/(tasks)/types/task";
 
 export interface TaskFormValues {
   title: string;
   description: string;
   startDate: string;
   dueDate: string;
+  status: TaskStatus;
 }
 
 export const taskFormValidationSchema = yup.object({
@@ -31,4 +33,8 @@ export const taskFormValidationSchema = yup.object({
         return new Date(value) >= new Date(startDate);
       }
     ),
+  status: yup
+    .string()
+    .oneOf(["todo", "inProgress", "done"], "Invalid status")
+    .required("Status is required"),
 });

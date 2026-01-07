@@ -1,6 +1,5 @@
 up:
-	@docker compose up --build -d --wait
-	@docker compose watch
+	@docker compose up --build --watch
 
 down:
 	@docker compose down -v

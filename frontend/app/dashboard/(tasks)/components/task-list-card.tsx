@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import {
   Card,
@@ -42,7 +42,6 @@ export function TaskListCard({ title, status, tasks = [] }: TaskListCardProps) {
   const isMobile = useIsMobile();
   const isDesktop = !isMobile;
 
-  // Update local tasks when server tasks change
   useEffect(() => {
     setLocalTasks(tasks);
   }, [tasks]);
@@ -69,13 +68,14 @@ export function TaskListCard({ title, status, tasks = [] }: TaskListCardProps) {
     description?: string;
     startDate?: string;
     dueDate?: string;
+    status?: TaskStatus;
   }) => {
     if (!editingTask) return;
 
     await updateTask({
       id: editingTask.id,
       ...values,
-      status: editingTask.status,
+      status: values.status ?? editingTask.status,
     });
     router.refresh();
   };
@@ -91,7 +91,6 @@ export function TaskListCard({ title, status, tasks = [] }: TaskListCardProps) {
   };
 
   const handleToggleComplete = async (taskId: string, isCompleted: boolean) => {
-    // Optimistic update: Update UI immediately
     const previousTasks = [...localTasks];
     setLocalTasks(
       localTasks.map((task) =>
@@ -142,42 +141,31 @@ export function TaskListCard({ title, status, tasks = [] }: TaskListCardProps) {
           getStatusColor(status)
         )}
       >
-        <CardHeader className="cursor-pointer select-none transition-colors hover:bg-zinc-50/50 dark:hover:bg-zinc-900/50 md:cursor-default md:hover:bg-transparent">
-          <CardTitle className="flex items-center justify-between">
-            <CollapsibleTrigger
-              asChild
-              disabled={isDesktop}
-              className="md:pointer-events-none flex-1"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-sm sm:text-base">{title}</span>
-                <div className="flex items-center gap-2 sm:gap-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowForm(true);
-                    }}
-                    className="size-8"
-                  >
-                    <Plus className="size-4" />
-                  </Button>
-                  <ChevronDown
-                    className={cn(
-                      "size-4 transition-transform duration-200 md:hidden",
-                      showCollapsible && "rotate-180"
-                    )}
-                  />
-                </div>
-              </div>
-            </CollapsibleTrigger>
-          </CardTitle>
-        </CardHeader>
+        <CollapsibleTrigger asChild disabled={isDesktop}>
+          <CardHeader className="cursor-pointer select-none transition-colors hover:bg-zinc-50/50 dark:hover:bg-zinc-900/50 md:cursor-default md:hover:bg-transparent">
+            <CardTitle className="flex items-center justify-between gap-2 sm:gap-3">
+              <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 sm:text-base">
+                {title}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowForm(true);
+                }}
+                className="size-8 shrink-0"
+                aria-label="Add new task"
+              >
+                <Plus className="size-4" />
+              </Button>
+            </CardTitle>
+          </CardHeader>
+        </CollapsibleTrigger>
         <CollapsibleContent>
           <CardContent className="flex-1 space-y-2">
             {localTasks.length === 0 ? (
-              <div className="flex h-full items-center justify-center">
+              <div className="flex h-32 items-center justify-center">
                 <p className="text-sm text-zinc-500 dark:text-zinc-400">
                   No tasks yet
                 </p>
@@ -208,6 +196,7 @@ export function TaskListCard({ title, status, tasks = [] }: TaskListCardProps) {
                   description: editingTask.description,
                   startDate: editingTask.startDate,
                   dueDate: editingTask.dueDate,
+                  status: editingTask.status,
                 }
               : undefined
           }
