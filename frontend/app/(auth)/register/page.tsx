@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import AuthForm from "@/(auth)/components/AuthForm";
 
 export default function RegisterPage() {
