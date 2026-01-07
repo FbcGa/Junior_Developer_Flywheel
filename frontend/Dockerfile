@@ -1,17 +1,21 @@
 FROM node:20-alpine AS base
 
+ARG APP_DIR=.
+
 RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /code
 
-COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* ./
+COPY ${APP_DIR}/package.json ${APP_DIR}/pnpm-lock.yaml* ${APP_DIR}/pnpm-workspace.yaml* ./
 RUN pnpm install
 
 FROM base AS dev
-COPY . .
+ARG APP_DIR=.
+COPY ${APP_DIR}/. .
 CMD ["pnpm", "dev"]
 
 FROM base AS builder
-COPY . .
+ARG APP_DIR=.
+COPY ${APP_DIR}/. .
 RUN pnpm build
 
 FROM node:20-alpine AS runner
